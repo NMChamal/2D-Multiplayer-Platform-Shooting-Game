@@ -23,11 +23,12 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
             GameManager.Instance.localPlayer = this.gameObject;
         }
     }
-
+    // RPC to Reduse Health
     [PunRPC] public void ReduceHealth(float amount, string arrowOwner) {
         ModifyHealth(amount, arrowOwner);
     }
 
+    // Health amount update
     private void ModifyHealth(float amount, string arrowOwner)
     {
         if (photonView.IsMine)
@@ -43,6 +44,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         CheckHealth(arrowOwner);
     }
 
+    // Check player is Dead or not and update health bar
     private void CheckHealth(string arrowOwner)
     {
         fillImage.fillAmount = healthAMount/100f;

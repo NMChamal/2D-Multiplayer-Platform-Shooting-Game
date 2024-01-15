@@ -17,19 +17,20 @@ public class Arrow : MonoBehaviourPunCallbacks, IPunObservable
     {
         StartCoroutine("DestroyByTime");    
     }
-
+    // Destror arrow if it not hit somthing
     IEnumerator DestroyByTime() { 
         yield return new WaitForSeconds(destroyTime);
         this.GetComponent<PhotonView>().RPC("DestroyObject", RpcTarget.All);
     }
 
+    // Arrow direction change
     [PunRPC]
     public void ChangeInfo(string playerName, bool left) {
         moveDir = left;
         arrowRenderer.flipX = left;
-        //print("THis arrow from  " + playerName);
         arrowOwner = playerName;
     }
+    // Destroy arrow
     [PunRPC]
     public void DestroyObject()
     {
